@@ -277,14 +277,14 @@ There are 3 codes on my computer : V61.cpp, V93.cpp and V117.cpp which seem to p
 
 Several attempts were made to combine the strengths of V61 with V93 or other codes, systematically resulting in a weaker hybrid version.
 
-*"Rich person problem: I don't know which cool AI to choose from!"*
+*"First world problem: I don't know which cool AI to choose from!"*
 
 ## 3) Area 51
 At some point in the game, the opponent has placed so many mines you DO NOT WANT to venture in that area, even with a Silence.
 
 When approaching such a minefield, my AI would natively recognize this and turn back.
 
-However, upon turning back it would go and hug the wall, effectively creating two disting chambers within my territory. Indeed, in terms of evaluating the "spaceLeft", the other chamber was still accessible by walking into the opponent's minefield!
+However, upon turning back it would go and hug the wall, effectively creating two distinct chambers within my territory. Indeed, in terms of evaluating the "spaceLeft", the other chamber was still accessible by walking into the opponent's minefield!
 
 I implemented many ~~solutions~~ to this problem,   only to see them fail one by one. Soft discouragement, hard interdiction, nothing would be enough to correct this late-game behavior.
 
