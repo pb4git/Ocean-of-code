@@ -160,13 +160,13 @@ As an example, assuming the submarine start in position X on the diagram above:
 
 Try to interleave a torpedo between all action and evaluate the probability to damage the opponent.
 
-	Move at turn 0                           Future damage taken   Damage dealt to opp
+    Move at turn 0                           Future damage taken   Damage dealt to opp
     {MOVE N SILENCE},                        0.055                 0.0
     {TORPEDO,MOVE N SILENCE},                0.055                 0.8
     {MOVE N SILENCE,TORPEDO},                0.055                 1.5
-    {SURFACE,MOVE N SILENCE},			     1.055                 0.0
-    {SURFACE,TORPEDO,MOVE N SILENCE},		 1.055                 0.8
-    {SURFACE,MOVE N SILENCE,TORPEDO},		 1.055                 1.3
+    {SURFACE,MOVE N SILENCE},                1.055                 0.0
+    {SURFACE,TORPEDO,MOVE N SILENCE},        1.055                 0.8
+    {SURFACE,MOVE N SILENCE,TORPEDO},        1.055                 1.3
     ...   (568 lines)                        ...                   ...
 
 ## Step 3
@@ -177,10 +177,10 @@ A torpedo sent might reveal the position of the submarine. The probability of be
     {MOVE N SILENCE},                        0.055                 0.0                   1.0
     {MOVE N SILENCE,TORPEDO},                0.055                 1.5                   2.0
     {TORPEDO,MOVE N SILENCE},                0.055                 0.8                   2.0
-    {SURFACE,MOVE N SILENCE},			     1.055                 0.0                   1.5
-    {SURFACE,TORPEDO,MOVE N SILENCE},		 1.055                 0.8                   0.0
-    {SURFACE,MOVE N SILENCE,TORPEDO},		 1.055                 1.3                   0.0
-    ...   (568 lines)                        ...                   ...
+    {SURFACE,MOVE N SILENCE},                1.055                 0.0                   1.5
+    {SURFACE,TORPEDO,MOVE N SILENCE},        1.055                 0.8                   0.0
+    {SURFACE,MOVE N SILENCE,TORPEDO},        1.055                 1.3                   0.0
+    ...   (568 lines)                        ...                   ...                   ...
 
 My retaliation to the opponent's torpedo is also evaluated to find situations where it is possible to wait for a better torpedo on the next turn.
 
