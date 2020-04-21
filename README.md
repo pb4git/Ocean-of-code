@@ -7,7 +7,7 @@ Codingame challenge - March/April 2020
 
   
 
-Ocean of Code is a multiplayer AI contest proposed on the Codingame platform from Friday the 20th of March to Monday the 20th of April 2020. It is based on the board game Captain Sonar and requires a delicate balancing act between being active and detectable with the submarine under your control while at the same time staying as stealthy as possible.
+Ocean of Code is a multiplayer AI contest proposed on the Codingame platform from Friday the 20th of March to Monday the 20th of April 2020. It is based on the board game Captain Sonar and requires manoeuvring your submarine with a delicate balance of staying active while remaining stealthy.
 
   
 
@@ -19,7 +19,7 @@ At the beginning, I was hooked on the challenge of implementing a proper system 
 
   
 
-Over the duration of the contest, I have written 8 major versions of my AI. Here is the breakdown of how they behaved, how they influenced my vision of the correct strategy and hence how I prioritized features for my final version.
+Over the duration of the contest, I have written 8 major versions of my AI. Here is the breakdown of how they behaved, how they influenced my vision of the correct strategy and hence, how I prioritized features for my final version.
 
 The **first version** was purely reactive and based on simple sequential  greedy rules:
 -   Move to the closest cells, stay in the biggest chamber   
@@ -30,10 +30,10 @@ The **first version** was purely reactive and based on simple sequential  greedy
     
 The **second and third versions** were able to *group move and torpedo actions together* if the opponent could be brought in range with a single movement. However, *this move-to-shoot logic was susceptible to close off a large area of the map*.
 
-The **fourth version** *prioritized stealthness over shooting*. Games were long, but would often be lost when the map is filled with the submarine's previous path: remaining hidden proves impossible when space is cramped, and I would lose in torpedo fights. At some point, *it is important to balance stealthness with aggressiveness*.
+The **fourth version** *prioritized stealthiness over shooting*. Games were long, but would often be lost when the map is filled with the submarine's previous path: remaining hidden proves impossible when space is cramped, and I would lose in torpedo fights. At some point, *it is important to balance stealthiness with aggressiveness*.
 
 By this time, moving with the sole objective to stay stealthy was a declining strategy as most players started to use mines efficiently. Movement was now a difficult trade-off between:
-- Keeping long chambers available (tron-like)
+- Keeping big chambers available (tron-like)
 - Staying stealthy
 - Avoiding mines
 - Approaching the opponent to shoot
@@ -47,7 +47,7 @@ At this point, I was ready to write my **eighth and final version** based on the
  # Strategy
 As of writing this PM, I have come to the conclusion that captain sonar must be played as two mini-games in one.
 1) A space-filling game where you must claim the most surface area to out-survive the opponent in the late game
-2) A waiting game where you must **at all point in time be ready** if the opponent finds and engages your submarine
+2) A waiting game where you must **at any time be ready** if the opponent finds and engages your submarine
 
 Obviously, this assumes decent fighting logic as soon as both submarines are close to each other and revealed.
 
