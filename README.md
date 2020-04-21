@@ -298,6 +298,8 @@ Stealth mine laying early game, fast whole map coverage mid game, efficient spac
 
 *I tried... I swear I tried, every other day.... It. Just. Wouldn't. Work!*
 # Conclusion
+First of all, thanks to all participants for not hiding their best AI: this allowed for a lot of fun during the 4 weeks, constantly trying to keep up with similarly improving opponents.
+
 Loved the game, though I'm not sure my family liked it as much during those 4 longs weeks.
 
 I actually am surprised that I liked the game this much, I had strongly voted against this exact game during our Mean Max brainstorming sessions.
