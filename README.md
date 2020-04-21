@@ -264,7 +264,7 @@ Several attempts were made to combine the strengths of V61 with V93 or other cod
 ## 3) Area 51
 At some point in the game, the opponent has placed so many mines you DO NOT WANT to venture in that area, even with a Silence.
 
-When approaching such a minefield, my AI would recognize this and turn back without adding a special feature.
+When approaching such a minefield, my AI would natively recognize this and turn back.
 
 However, upon turning back it would go and hug the wall, effectively creating two disting chambers within my territory. Indeed, in terms of evaluating the "spaceLeft", the other chamber was still accessible by walking into the opponent's minefield!
 
@@ -280,3 +280,11 @@ I would have loved to include various behavioral patterns depending on the recog
 Stealth mine laying early game, fast whole map coverage mid game, efficient space-filling and avoidance late game.
 
 *I tried... I swear I tried, every other day.... It. Just. Wouldn't. Work!*
+# Conclusion
+Loved the game, though I'm not sure my family liked it as much during those 4 longs weeks.
+
+I actually am surprised that I liked the game this much, I had strongly voted against this exact game during our Mean Max brainstorming sessions.
+
+Thanks to the creators for making this possible.
+
+Thanks to Codingame for providing the great, free platform on which these contests are organized.
