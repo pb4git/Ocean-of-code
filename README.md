@@ -158,7 +158,7 @@ As an example, assuming the submarine start in position X on the diagram above:
         0   0   0   0   0   0
 
 
-## Step 2
+## Step 2: Can I deal damage?
 
 Try to interleave a torpedo between all action and evaluate the probability to damage the opponent.
 
@@ -171,7 +171,7 @@ Try to interleave a torpedo between all action and evaluate the probability to d
     {SURFACE,MOVE N SILENCE,TORPEDO},        1.055                 1.3
     ...   (568 lines)                        ...                   ...
 
-## Step 3
+## Step 3: Will he retaliate?
 
 A torpedo sent might reveal the position of the submarine. The probability of being damaged by the opponent is calculated assuming there is an equal chance for the opponent's presence in all positions of his presence map and the opponent will play aggressively (i.e.: move and torpedo if in range, even if he enters a mine field).
 
