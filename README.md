@@ -61,7 +61,7 @@ This approach introduces a new compromise to make:
 
   As explained above, the objective of this final version is to balance correctly the four actions Torpedo / Move / Silence / Surface and allow fine-tuned compromise between aggressive and defensive behaviors.
 ## Evaluation framework
-In order to have a unified evaluation, all actions are evaluated in the framework of total discounted damage taken from or done to the opponent.
+In order to have a unified evaluation, all actions are evaluated in the framework of total discounted damage taken from or done to the opponent in the future.
 - For a torpedo, it is simply the damage probability given the opponent presence map `damageProbability*0.95^0`
 - For a surface, we take a known damage when surface happens and assume we'll need to surface again after `pathSize` turns : ``1*(0.95^turn + 0.95^(turn + pathSize)``
 - For space-filling, `0.95^spaceLeft` : we will need to surface when all cells are filled in
@@ -203,5 +203,80 @@ Some key advantages of this search are:
 In no particular order, a large amount of tweaks were added to tune the evaluation function.
 
 - The silence cost is largely reduced if a torpedo was launched
-- Favor Move after Torpedo to charge faster
-(((not finished)))
+- Favor Move after Torpedo
+
+
+# What worked...
+
+## 1) Respect the opponent
+You are in Legend, your opponent too, his bot is at least half-decent. Assume the opponent plays well. Consequently, there is little chance he is standing right over your mines.
+With this logic, I filtered out as many locations as possible from my tracker where the opponent was sitting on my mines.
+
+Direct effects:
+- Instead of 2.5 triggers per game, I went down to 1.3 triggers per game
+- Damage dealt with mines per game was stable around 0.9, despite triggering far less mines
+- Since less mines are triggered, you maintain control over more territory
+- Approximately +3 score on the CG leaderboard
+
+Indirect effect:
+- In the endgame, this assumes the opponent doesn't enter your territory. Hence he's further from you, and less considered a threat: it is easier to conserve Silence charges for actual necessary evasion or instakill combinations.
+
+## 2) Tweak, tweak, tweak...
+After 8 major versions and a LOT of minor versions, my code had become bloated with features that *should* work but whose effect I was never able to ascertain.
+
+At this point, I decided to spend some time tweaking my evaluation coefficients and found very large gains, going from 40% winrate against a fixed panel of opponents to 50% winrate against that same panel.
+
+For example, allowing torpedoes with a 90% hitrate instead of 100% was a net +2 score on the CG leaderboard.  This precise change had been ineffective on earlier iterations of my code, but it proved largely positive at the end of the contest.
+
+## 3) Dual tracker system
+It is acceptable to assume the opponent will not launch a torpedo or trigger a mine that will damage him. However, it is not safe in terms of tracking: you might end up with absolutely no possibilities remaining.
+
+I maintained at all times two trackers:
+- one "safe" making no assumption
+- one "unsafe" making reasonable assumptions
+
+If at any point in time the unsafe tracker returned no possible position, it would by default be reverted to the "safe" tracker values and resume from there.
+
+The "unsafe" tracker could have included logic such as "*If the opponent had been here, he would have used a torpedo on me. I know he hasn't, so he mustn't have been there.*", but I never took the time to implement such logic.
+
+# ... and what didn't
+## 1) Intuition
+At first I adjusted the coefficients according to my understanding of the game, with limited results.
+
+I then switched to a systematic approach with CGBenchmark with the objective of maximizing observed winrate, and it worked a lot better.
+
+I am still **highly** surprised with the final constants, showing I don't understand the game as much as I thought...
+
+For example, the value of the opponent's torpedo is 3.5x lower than the value of a silence. This means he must launch 2 torpedoes dealing 2 damage each for an evading Silence to be "worth it".
+
+*I don't get it. And I never will. But it works....*
+
+## 2) Mixing codes
+There are 3 codes on my computer : V61.cpp, V93.cpp and V117.cpp which seem to perform remarkably well on CGBenchmark, despite using vastly different evaluation methods and assumptions about the opponent.
+- V61 assumes the opponent used Silence for the shortest distance or the shortest distance + 1, and is subsequently extra agressive.
+- V93 values stealth and staying away from the opponent, at the cost of very inefficient space-filling
+- V117 is my final submitted version, somewhat balanced
+
+Several attempts were made to combine the strengths of V61 with V93 or other codes, systematically resulting in a weaker hybrid version.
+
+*"Rich person problem: I don't know which cool AI to choose from!"*
+
+## 3) Area 51
+At some point in the game, the opponent has placed so many mines you DO NOT WANT to venture in that area, even with a Silence.
+
+When approaching such a minefield, my AI would recognize this and turn back without adding a special feature.
+
+However, upon turning back it would go and hug the wall, effectively creating two disting chambers within my territory. Indeed, in terms of evaluating the "spaceLeft", the other chamber was still accessible by walking into the opponent's minefield!
+
+I implemented many ~~solutions~~ to this problem,   only to see them fail one by one. Soft discouragement, hard interdiction, nothing would be enough to correct this late-game behavior.
+
+This ties us back to #1) Intuition:
+
+*It should work. But it didn't...*
+
+## 4) Adaptive early/mid/late game behavior
+I would have loved to include various behavioral patterns depending on the recognized stage of the game.
+
+Stealth mine laying early game, fast whole map coverage mid game, efficient space-filling and avoidance late game.
+
+*I tried... I swear I tried, every other day.... It. Just. Wouldn't. Work!*
