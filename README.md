@@ -295,7 +295,7 @@ This ties us back to #1) Intuition:
 ## 4) Adaptive early/mid/late game behavior
 I would have loved to include various behavioral patterns depending on the recognized stage of the game.
 
-Stealth mine laying early game, fast whole map coverage mid game, efficient space-filling and avoidance late game.
+Stealthy mine laying early game, fast whole map coverage mid game, efficient space-filling and avoidance late game.
 
 *I tried... I swear I tried, every other day.... It. Just. Wouldn't. Work!*
 # Conclusion
