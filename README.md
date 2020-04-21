@@ -205,7 +205,7 @@ In no particular order, a large amount of tweaks were added to tune the evaluati
 - The silence cost is largely reduced if a torpedo was launched
 - Favor Move after Torpedo
 - Favor hugging walls
-- Decrease perceived damage taken from mines if I am sufficiently stealth
+- Decrease perceived damage taken from mines if I am sufficiently stealthy
 - I'm sorry there are so many I won't list them all here...
 
 ## Other actions
