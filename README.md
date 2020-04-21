@@ -2,7 +2,7 @@
 A Post-Mortem by pb4
 Codingame challenge - March/April 2020  
 
-## Introduction:
+# Introduction:
 
   
 
@@ -14,7 +14,7 @@ At the beginning, I was hooked on the challenge of implementing a proper system 
 
   
 
-# J’ai fait plusieurs versions:
+# First versions and game analysis
 
   
 
