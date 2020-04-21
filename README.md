@@ -1,3 +1,4 @@
+
 # Ocean of Code
 A Post-Mortem by pb4
 Codingame challenge - March/April 2020  
@@ -62,9 +63,9 @@ This approach introduces a new compromise to make:
 ## Evaluation framework
 In order to have a unified evaluation, all actions are evaluated in the framework of total discounted damage taken from or done to the opponent.
 - For a torpedo, it is simply the damage probability given the opponent presence map `damageProbability*0.95^0`
-- For a surface, it is simply the known `1*0.95^turn` damage taken when surface happens
+- For a surface, we take a known damage when surface happens and assume we'll need to surface again after `pathSize` turns : ``1*(0.95^turn + 0.95^(turn + pathSize)``
 - For space-filling, `0.95^spaceLeft` : we will need to surface when all cells are filled in
-- For a mine, I take `mineDamage*0.95^turn` damage when walking through a mine field. See below how mineDamage is calculated.
+- For a mine, the submarine takes `mineDamage*0.95^turn` damage when walking through a mine field. See below how mineDamage is calculated.
 
 ## Overall structure
 The objective of the search is to evaluate nearly exhaustively all Surface / Move / Torpedo / Silence combinations.
@@ -171,7 +172,7 @@ Try to interleave a torpedo between all action and evaluate the probability to d
 
 ## Step 3
 
-A torpedo sent might reveal the position of the submarine. The probability of being damaged by the opponent is calculated assuming there is an equal chance for the opponent's presence in all positions of his presence map and the opponent will play aggressively (ie: move and torpedo if in range, even if he enters a mine field).
+A torpedo sent might reveal the position of the submarine. The probability of being damaged by the opponent is calculated assuming there is an equal chance for the opponent's presence in all positions of his presence map and the opponent will play aggressively (i.e.: move and torpedo if in range, even if he enters a mine field).
 
     Move at turn 0                           Future damage taken   Damage dealt to opp   Retaliation by opp
     {MOVE N SILENCE},                        0.055                 0.0                   1.0
@@ -188,5 +189,19 @@ My retaliation to the opponent's torpedo is also evaluated to find situations wh
 In the end, the action chosen is the one that minimizes `futureDamageTakenFromMines - damageDealtToOpponent + damageReceivedFromOpponentRetaliation`.
 
 Some key advantages of this search are:
-- it is possible to **balance aggressiveness, mine evasion and silence usage**
-- silence may be tuned to "jump" over mine fields and evade incoming torpedoes: this fits my objective to minimize silence usage overall
+- In extreme cases, the search remains well-behaved and insensitive to edge-cases:
+--- If the opponent position is known with 100% certainty, the algorithm behaves like a **3-ply deep minimax**, for efficient fighting.
+--- If the opponent position is not known, the algorithm behaves like a **5-ply deep space-filling-mine-avoiding** algorithm
+--- In between, the search is able to balance both requirements
+- It is possible to **balance aggressiveness, mine evasion, torpedo avoidance and silence usage**
+- Silence may be tuned to "jump" over mine fields and evade incoming torpedoes: this fits the strategic objective to minimize silence usage overall
+- Ability to find **natively all types of combinations** within the same framework, and to **combine objectives** such as using surface + silence away to both avoid a torpedo and not enter a minefield
+
+
+## Tweaks
+
+In no particular order, a large amount of tweaks were added to tune the evaluation function.
+
+- The silence cost is largely reduced if a torpedo was launched
+- Favor Move after Torpedo to charge faster
+(((not finished)))
