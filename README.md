@@ -235,7 +235,7 @@ Direct effects:
 Indirect effect:
 - In the endgame, this assumes the opponent doesn't enter your territory. Hence he's further from you, and less considered a threat: it is easier to conserve Silence charges for actual necessary evasion or instakill combinations.
 
-## 2) Tweak, tweak, tweak...
+## 2) Tweak, tweak, tweak
 After 8 major versions and a LOT of minor versions, my code had become bloated with features that *should* work but whose effect I was never able to ascertain.
 
 At this point, I decided to spend some time tweaking my evaluation coefficients and found very large gains, going from 40% winrate against a fixed panel of opponents to 50% winrate against that same panel.
@@ -252,6 +252,9 @@ I maintained at all times two trackers:
 If at any point in time the unsafe tracker returned no possible position, it would by default be reverted to the "safe" tracker values and resume from there.
 
 The "unsafe" tracker could have included logic such as "*If the opponent had been here, he would have used a torpedo on me. I know he hasn't, so he mustn't have been there.*", but I never took the time to implement such logic.
+
+## 4) Collecting replay statistics
+Compare surface rate, damage taken from mines, game length, etc... with all other top bots was a key component in knowing on which area to focus my efforts for further bot improvements.
 
 # ... and what didn't
 ## 1) Intuition
