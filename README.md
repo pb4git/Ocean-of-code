@@ -204,7 +204,21 @@ In no particular order, a large amount of tweaks were added to tune the evaluati
 
 - The silence cost is largely reduced if a torpedo was launched
 - Favor Move after Torpedo
+- Favor hugging walls
+- Decrease perceived damage taken from mines if I am sufficiently stealth
+- I'm sorry there are so many I won't list them all here...
 
+## Other actions
+Basic implementation everywhere which was reused from early versions of my bot. I never saw the need to improve on those.
+### Mine
+If you have enough charges and you can lay a mine with more than 3 new spots hit, lay the mine.
+If you have full charges everywhere, lay a random mine anyway.
+### Trigger
+Upon choosing a Torpedo/Surface/Silence/Move combination with the main algorithm, try to interleave a trigger everwhere between each action.
+If the damage probability is sufficient, use the trigger action.
+The threshold is adaptive depending on the overlap with other mines.
+### Sonar
+If between 40% and 60% of the opponent's positions are within a single sector, Sonar this sector.
 
 # What worked...
 
